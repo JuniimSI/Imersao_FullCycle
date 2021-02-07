@@ -24,16 +24,27 @@ import { TransactionDto } from 'src/dto/transaction.dto';
   import { Repository } from 'typeorm';
   
   @Controller('bank-accounts/:bankAccountId/transactions')
-  export class TransactionController{
-    
+  export class TransactionController implements OnModuleInit, OnModuleDestroy{
+    private kafkaProducer: Producer;
+
     constructor(
       @InjectRepository(BankAccount)
       private bankAccountRepo: Repository<BankAccount>,
       @InjectRepository(Transaction)
       private transactionRepo: Repository<Transaction>,
+
+      @Inject('TRANSACTION_SERVICE')
+      private kafkaClient: ClientKafka,
     
     ) {}
+
+    async onModuleInit() {
+      this.kafkaProducer = await this.kafkaClient.connect();
+    }
   
+    async onModuleDestroy() {
+      await this.kafkaProducer.disconnect();
+    }
       
     @Get()
     index(
@@ -65,23 +76,29 @@ import { TransactionDto } from 'src/dto/transaction.dto';
     ) {
       await this.bankAccountRepo.findOneOrFail(bankAccountId);
   
-      // let transaction = this.transactionRepo.create({
-      //   ...body,
-      //   amount: body.amount * -1,
-      //   bank_account_id: bankAccountId,
-      //   operation: TransactionOperation.debit,
-      // });
-      // transaction = await this.transactionRepo.save(transaction);
+      let transaction = this.transactionRepo.create({
+        ...body,
+        amount: body.amount * -1,
+        bank_account_id: bankAccountId,
+        operation: TransactionOperation.debit,
+      });
+      transaction = await this.transactionRepo.save(transaction);
   
-      // const sendData = {
-      //   id: transaction.external_id,
-      //   accountId: bankAccountId,
-      //   amount: body.amount,
-      //   pixkeyto: body.pix_key_key,
-      //   pixKeyKindTo: body.pix_key_kind,
-      //   description: body.description,
-      // }; 
-      // return transaction;
+      const sendData = {
+        id: transaction.external_id,
+        accountId: bankAccountId,
+        amount: body.amount,
+        pixkeyto: body.pix_key_key,
+        pixKeyKindTo: body.pix_key_kind,
+        description: body.description,
+      }; 
+
+      await this.kafkaProducer.send({
+        topic: 'transactions',
+        messages: [{ key: 'transactions', value: JSON.stringify(sendData) }],
+      });
+      
+      return transaction;
     }
   
     
