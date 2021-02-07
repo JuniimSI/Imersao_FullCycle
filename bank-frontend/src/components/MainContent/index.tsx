@@ -1,0 +1,12 @@
+// @flow 
+import classes from './MainContent.module.scss';
+
+import * as React from 'react';
+
+export const MainContent: React.FunctionComponent = (props) => {
+    return (
+        <main className={classes.root}>
+            <div className="container">{props.children}</div>
+        </main>
+    );
+};
