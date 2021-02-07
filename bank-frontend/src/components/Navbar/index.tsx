@@ -27,3 +27,5 @@ export const Navbar: React.FunctionComponent = (props) => {
         </nav>
     );
 };
+
+export default Navbar;

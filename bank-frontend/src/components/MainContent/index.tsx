@@ -10,3 +10,5 @@ export const MainContent: React.FunctionComponent = (props) => {
         </main>
     );
 };
+
+export default MainContent;
