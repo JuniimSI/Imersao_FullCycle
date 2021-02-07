@@ -32,3 +32,10 @@ lerna-debug.log*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+.history/
+.docker/dbdata
+.docker/dbdatabbx
+.docker/dbdatacter
+dist-bbx
+dist-cter

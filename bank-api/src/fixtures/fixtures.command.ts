@@ -1,6 +1,5 @@
 import { Command, Console } from "nestjs-console";
 import { getConnection } from "typeorm";
-import fixtures from './fixtures';
 import * as chalk from 'chalk';
 
 @Console()
@@ -11,6 +10,7 @@ export class FixturesCommand{
     })
     async command(){
         await this.runMigrations();
+        const fixtures = (await import(`./fixtures/bank-${process.env.BANK_CODE}`)).default
         for(const fixture of fixtures){
             await this.createInDataBase(fixture.model, fixture.fields);
         }
