@@ -15,7 +15,7 @@ const PixKeyCard: React.FunctionComponent<PixKeyCardProps> = (props) => {
   const { pixKey } = props;
   const bank = React.useContext(BankContext);
   return (
-    <div className={`${classes.root} ${classes.bank001}`}>
+    <div className={`${classes.root} ${classes[bank.cssCode]}`}>
       <p className={classes.kind}>{pixKeyKinds[pixKey.kind]}</p>
       <span className={classes.key}>{pixKey.key}</span>
     </div>

@@ -12,7 +12,7 @@ const Navbar: React.FunctionComponent<NavbarProps> = (props) => {
   const bank = useContext(BankContext);
   return (
     <nav
-      className={`navbar navbar-expand-lg ${classes.root} ${classes.bank001}`}
+      className={`navbar navbar-expand-lg ${classes.root} ${classes[bank.cssCode]}`}
     >
       <div className={`container-fluid ${classes.navbarBody}`}>
         <Link href="/bank-accounts" as="/bank-accounts">

@@ -17,7 +17,7 @@ const ActionLink: React.FunctionComponent<ActionLinkProps> = (props) => {
   const bank = React.useContext(BankContext);
   return (
     <Link {...rest}>
-      <a className={`${classes.actionLink} ${classes.bank001}`}>{children}</a>
+      <a className={`${classes.actionLink} ${classes[bank.cssCode]}`}>{children}</a>
     </Link>
   );
 };
