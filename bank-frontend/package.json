@@ -15,7 +15,11 @@
     "next": "10.0.6",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "sass": "^1.32.6"
+    "react-hook-form": "^6.15.1",
+    "sass": "^1.32.6",
+    "slug": "^4.0.2",
+    "sweetalert2": "^10.14.0",
+    "sweetalert2-react-content": "^3.2.2"
   },
   "devDependencies": {
     "@types/node": "^14.14.25",
