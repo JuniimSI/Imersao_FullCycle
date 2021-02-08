@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import BankContext from "../../context/BankContext";
-
 import classes from "./BankAccountBalance.module.scss";
 
 interface BankAccountBalanceProps {
