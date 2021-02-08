@@ -48,7 +48,7 @@ const PixRegister: NextPage<PixRegisterProps> = (props) => {
   }
 
   return (
-    <Layout >
+    <Layout bankAccount={bankAccount}>
       <div className="row">
         <div className="col-sm-6">
           <Title>Cadastrar chave Pix</Title>

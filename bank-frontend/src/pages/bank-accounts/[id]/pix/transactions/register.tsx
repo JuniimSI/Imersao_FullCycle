@@ -46,7 +46,7 @@ const TransactionRegister: NextPage<TransactionRegisterProps> = (props) => {
   }
 
   return (
-    <Layout>
+    <Layout bankAccount={bankAccount}>
       <Title>Realizar transferência</Title>
       <Card>
         <form onSubmit={handleSubmit(onSubmit)}>
