@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bankfrontend002
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bankfrontend002
+  template:
+    metadata:
+      labels:
+        app: bankfrontend002
+    spec:
+      containers:
+        - name: bankfrontend002
+          image: juniimsi/imersao-bankfronted:latest
+          ports:
+            - containerPort: 3000
+         
+
+          volumeMounts:
+            - name: bankfrontend002-volume
+              mountPath: /app/.env
+              subPath: .env
+              
+
+      volumes:
+        - name: bankfrontend002-volume
+          configMap:
+            name: bankfrontend002-conf
+            items:
+              - key: env
+                path: .env
+          
