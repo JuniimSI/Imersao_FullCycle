@@ -1,8 +1,8 @@
 # Código desenvolvido durante a imersão Full Cycle
-## Backend com Golang
-## Frontend usando nextjs
-## Usando Apache Kafka
-## E Grpc
+- Backend com Golang
+- Frontend usando nextjs
+- Usando Apache Kafka
+- E Grpc
 
 ## Sobre o repositório
 Esse repositório contém todo código utilizado durante as aulas para referência.
